@@ -3,6 +3,7 @@ import 'package:bio_homework/dothemath.dart';
 import 'package:flutter/material.dart';
 
 import 'ListScreen.dart';
+import 'TextFieldWidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     List<IterationItem> its = [IterationItem(50, 75), IterationItem(22, 33)];
 
-    return MaterialApp(home: HomePage());
+    return MaterialApp(home: HomePage(), theme: ThemeData(fontFamily: "Nunito"),);
   }
 }
 
@@ -46,8 +47,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ricos Bio Hausaufgabe"),
+        title: Text("Ricos Bio Hausaufgabe", style: TextStyle(fontFamily: 'Nunito'),),
         shadowColor: Colors.transparent,
+        backgroundColor: Color(0xff1768AC),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -57,56 +59,11 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
           child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: Controller1,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Value 1",
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: Controller2,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Value 2",
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: Controller3,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "diffusion",
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: Controller4,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "MaxIterations",
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                  controller: Controller5,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "target",
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
+              CustomTextField(controller: Controller1, title: "Value1",),
+              CustomTextField(controller: Controller2, title: "Value2",),
+              CustomTextField(controller: Controller3, title: "diffusion",),
+              CustomTextField(controller: Controller4, title: "MaxIteration",),
+              CustomTextField(controller: Controller5, title: "target",),
               Row(
                 children: [
                   Checkbox(

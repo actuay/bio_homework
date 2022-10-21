@@ -17,6 +17,7 @@ class ListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Ricos Bio Hausaufgabe:"),
         shadowColor: Colors.transparent,
+          backgroundColor: Color(0xff1768AC),
       ),
       body: ListView.builder(
           itemCount: iterations.length,

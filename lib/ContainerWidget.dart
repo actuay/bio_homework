@@ -13,27 +13,13 @@ class ContainerWidgetThing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350,
-      height: 100,
       decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        border: Border.all(color: Color(0xff03256C)),
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(index.toString())
-          ),
-          Row(
-            children: [
-              Expanded(child: Center(child: Text("Value 1: " + val1.toString()))),
-              Padding(padding: EdgeInsets.fromLTRB(2.5, 0, 2.5, 0)),
-              Expanded(child: Center(child: Text("Value 2: " + val2.toString()))),
-            ],
-          ),
-        ],
+      child: ListTile(
+        leading: Text(index.toString()),
+        title: Text("                  " + val1.toString() + "                  " + val2.toString()),
       ),
     );
   }
