@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'package:bio_homework/Calculation.dart';
 import 'package:bio_homework/IterationItem.dart';
+import 'package:bio_homework/calculationItem.dart';
 import 'package:flutter/material.dart';
 
 class DoTheMath{
@@ -57,27 +59,33 @@ class DoTheMath{
     return ((value * mod).round().toDouble() / mod);
   }
 
-  List<IterationItem> Iterate(){
+  List<Calculation> Iterate(){
 
-    List<IterationItem> iterations = [];
+    List<Calculation> calcs = [];
 
     for(int i = 0; i <= maxIterations || i == target; i++){
 
       IterationItem Item;
+      CalculationItem calcItem;
       if(roundNumbers){
+        calcItem = CalculationItem(X1, X2, diffusionFactor);
         Item = GetRoundedVals(X1, X2, diffusionFactor);
+        calcItem = CalculationItem(calcItem.val1.roundToDouble(), calcItem.val2.roundToDouble(), diffusionFactor);
       }else{
         Item = GetNewVals(X1, X2, diffusionFactor);
+        calcItem = CalculationItem(X1, X2, diffusionFactor);
         Item.val1 = roundDouble(Item.val1, 3);
         Item.val2 = roundDouble(Item.val2, 3);
+        calcItem.val1 = roundDouble(calcItem.val1, 3);
+        calcItem.val2 = roundDouble(calcItem.val2, 3);
       }
 
-      iterations.add(Item);
+      calcs.add(Calculation(Item, calcItem));
 
       X1 = Item.val1;
       X2 = Item.val2;
     }
-    return iterations;
+    return calcs;
   }
 
 }

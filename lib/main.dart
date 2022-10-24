@@ -1,3 +1,4 @@
+import 'package:bio_homework/Calculation.dart';
 import 'package:bio_homework/IterationItem.dart';
 import 'package:bio_homework/dothemath.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                       }
                   ),
                   Expanded(
-                      child: Text("Round Numbers"),
+                      child: Text("Round Numbers", style: TextStyle(fontFamily: 'Nunito'),),
                   ),
 
                 ],
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   child: Center(child: Text
-                    ("Iterate", style: TextStyle(color: Colors.white),)
+                    ("Iterate", style: TextStyle(color: Colors.white, fontFamily: 'Nunito'),)
                   ),
                 ),
                 onTap: (){
@@ -103,11 +104,11 @@ class _HomePageState extends State<HomePage> {
                   );
                   mathStuff.StartIteration();
 
-                  final List<IterationItem> its = mathStuff.Iterate();
+                  final List<Calculation> calcs = mathStuff.Iterate();
 
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ListScreen(iterations: its)),
+                    MaterialPageRoute(builder: (context) => ListScreen(calcs: calcs)),
                   );
                 },
               )
