@@ -106,7 +106,7 @@ class DoTheMath{
         );
         calcs[i].calculationItem = CalculationItem(
             calcs[i].calculationItem.val1.roundToDouble(),
-            calcs[i].calculationItem.val1.roundToDouble(),
+            calcs[i].calculationItem.val2.roundToDouble(),
             diffusionFactor);
       }
     }
