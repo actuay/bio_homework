@@ -14,6 +14,7 @@ class DoTheMath{
   double target;
 
   bool roundNumbers;
+  bool roundWeirdNumbers;
 
   DoTheMath(
       this.value1,
@@ -22,6 +23,7 @@ class DoTheMath{
       this.maxIterations,
       this.target,
       this.roundNumbers,
+      this.roundWeirdNumbers,
       );
 
   late double X1;
@@ -36,12 +38,18 @@ class DoTheMath{
   }
 
   IterationItem GetRoundedVals(double val1, double val2, double diffFac){
-    val1 = val1.round().toDouble();
-    val2 = val2.round().toDouble();
 
     IterationItem Item = IterationItem(
       (val1 - val1 * diffFac + val2 * diffFac).roundToDouble(),
       (val2 - val2 * diffFac + val1 * diffFac).roundToDouble(),
+    );
+    return Item;
+  }
+
+  IterationItem GetWeirdRoundedVals(double val1, double val2, double diffFac){
+    IterationItem Item = IterationItem(
+      roundDouble(val1 - val1 * diffFac + val2 * diffFac, 1),
+      roundDouble(val2 - val2 * diffFac + val1 * diffFac, 1),
     );
     return Item;
   }
@@ -71,7 +79,11 @@ class DoTheMath{
         calcItem = CalculationItem(X1, X2, diffusionFactor);
         Item = GetRoundedVals(X1, X2, diffusionFactor);
         calcItem = CalculationItem(calcItem.val1.roundToDouble(), calcItem.val2.roundToDouble(), diffusionFactor);
-      }else{
+      }else if(roundWeirdNumbers){
+        calcItem = CalculationItem(X1, X2, diffusionFactor);
+        Item = GetWeirdRoundedVals(X1, X2, diffusionFactor);
+        calcItem = CalculationItem(calcItem.val1.roundToDouble(), calcItem.val2.roundToDouble(), diffusionFactor);
+      } else{
         Item = GetNewVals(X1, X2, diffusionFactor);
         calcItem = CalculationItem(X1, X2, diffusionFactor);
         Item.val1 = roundDouble(Item.val1, 3);
@@ -85,6 +97,20 @@ class DoTheMath{
       X1 = Item.val1;
       X2 = Item.val2;
     }
+
+    if(roundWeirdNumbers){
+      for(int i = 0; i <= calcs.length - 1; i++){
+        calcs[i].iterationItem = IterationItem(
+            calcs[i].iterationItem.val1.roundToDouble(),
+            calcs[i].iterationItem.val2.roundToDouble(),
+        );
+        calcs[i].calculationItem = CalculationItem(
+            calcs[i].calculationItem.val1.roundToDouble(),
+            calcs[i].calculationItem.val1.roundToDouble(),
+            diffusionFactor);
+      }
+    }
+
     return calcs;
   }
 

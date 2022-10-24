@@ -2,7 +2,7 @@
 class CalculationItem{
   double val1;
   double val2;
-  final double diffFac;
+  double diffFac;
 
   CalculationItem(
       this.val1,

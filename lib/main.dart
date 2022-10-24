@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   final Controller4 = TextEditingController();
   final Controller5 = TextEditingController();
   bool roundNumbers = false;
+  bool roundWeirdNumbers = false;
 
   @override
   void dispose() {
@@ -64,22 +65,41 @@ class _HomePageState extends State<HomePage> {
               CustomTextField(controller: Controller2, title: "Value2",),
               CustomTextField(controller: Controller3, title: "diffusion",),
               CustomTextField(controller: Controller4, title: "MaxIteration",),
-              CustomTextField(controller: Controller5, title: "target",),
-              Row(
-                children: [
-                  Checkbox(
-                      value: roundNumbers,
-                      onChanged: (bool? value){
-                        setState(() {
-                          roundNumbers = value!;
-                        });
-                      }
-                  ),
-                  Expanded(
-                      child: Text("Round Numbers", style: TextStyle(fontFamily: 'Nunito'),),
-                  ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Checkbox(
+                        value: roundNumbers,
+                        onChanged: (bool? value){
+                          setState(() {
+                            roundNumbers = value!;
+                          });
+                        }
+                    ),
+                    Expanded(
+                        child: Text("Round Numbers", style: TextStyle(fontFamily: 'Nunito'),),
+                    ),
 
-                ],
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Checkbox(
+                        value: roundWeirdNumbers,
+                        onChanged: (bool? value){
+                          setState(() {
+                            roundWeirdNumbers = value!;
+                          });
+                        }
+                    ),
+                    Expanded(
+                      child: Text("Round Numbers like Frau Hermes", style: TextStyle(fontFamily: 'Nunito'),),
+                    ),
+
+                  ],
+                ),
               ),
               InkWell(
                 child: Container(
@@ -99,8 +119,9 @@ class _HomePageState extends State<HomePage> {
                       double.parse(Controller2.text),
                       double.parse(Controller3.text),
                       int.parse(Controller4.text),
-                      double.parse(Controller1.text),
+                      double.parse("0"),
                       roundNumbers,
+                      roundWeirdNumbers,
                   );
                   mathStuff.StartIteration();
 
